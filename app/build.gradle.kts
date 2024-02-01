@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -43,6 +42,6 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10.1")
-
-
+    // https://mvnrepository.com/artifact/com.squareup.picasso/picasso
+    implementation("com.squareup.picasso:picasso:2.8")
 }

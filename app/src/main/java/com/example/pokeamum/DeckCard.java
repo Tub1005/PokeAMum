@@ -1,6 +1,6 @@
 package com.example.pokeamum;
 
-public class EveryCards {
+public class DeckCard {
     public String id;
     public String localId;
     public String name;
