@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         NumberPicker playersPicker = findViewById(R.id.np_players);
         playersPicker.setMinValue(2);
-        playersPicker.setMaxValue(4);
+        playersPicker.setMaxValue(2);
         playersPicker.setValue(2);
 
         GameSetup gameSetup = new GameSetup(this);

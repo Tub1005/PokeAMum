@@ -87,7 +87,12 @@ public class GameSetup extends Thread {
         String url = "https://api.tcgdex.net/v2/en/cards/" + id;
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             Card card = new Gson().fromJson(response, Card.class);
-            player.cards.add(card);
+            //if (card.attacks == null  || card.hp == 0){
+                //numCards++;
+            //}
+            //else {
+                player.cards.add(card);
+            //}
         }, error -> Log.d("Volley", error.toString()));
         requestQueue.add(request);
     }

@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -58,14 +59,13 @@ public class GameActivity extends AppCompatActivity {
         p1Card = findViewById(R.id.player1_card);
         p2Card = findViewById(R.id.player2_card);
         nextRound = findViewById(R.id.nxt_round);
-
     }
 
     private void battle(){
         getCard(0);
         getCard(1);
         roundCounter();
-
+        getFight();
 
 
     }
@@ -80,13 +80,41 @@ public class GameActivity extends AppCompatActivity {
 
     }
     private void getFight(){
-        for(Attack attack: players.get(1).cards.get(round).attacks){
-
+        int p1NrOfAttack = 0;
+        int p2NrOfAttack = 0;
+        for(Attack attack: players.get(0).cards.get(round).attacks){
+            if (attack == null || attack.damage == null){break;}
+            int damage = Integer.parseInt(attack.damage);
+            if (players.get(1).cards.get(round).hp == 0){break;}
+            int opponentHp = players.get(1).cards.get(round).hp;
+            p1NrOfAttack = opponentHp / damage;
+        }for(Attack attack: players.get(1).cards.get(round).attacks){
+            if (attack == null || attack.damage == null){break;}
+            int damage = Integer.parseInt(attack.damage);
+            if (players.get(1).cards.get(round).hp == 0){break;}
+            int opponentHp = players.get(0).cards.get(round).hp;
+            p2NrOfAttack = opponentHp / damage;
+        }
+        if (p1NrOfAttack > p2NrOfAttack){
+            Toast.makeText(this, "Player 1 Wins", Toast.LENGTH_LONG).show();
+            p1Points++;
+            ((TextView)findViewById(R.id.player1_point)).setText("Player 1 points: " + p1Points.toString());
+        } else if (p1NrOfAttack < p2NrOfAttack) {
+            Toast.makeText(this, "Player 2 Wins", Toast.LENGTH_LONG).show();
+            p2Points++;
+            ((TextView)findViewById(R.id.player2_point)).setText("Player 2 points: " + p2Points.toString());
+        }
+        else {
+            Toast.makeText(this, "Draw", Toast.LENGTH_LONG).show();
+            p1Points++;
+            p2Points++;
+            ((TextView)findViewById(R.id.player1_point)).setText("Player 1 points: " + p1Points.toString());
+            ((TextView)findViewById(R.id.player2_point)).setText("Player 2 points: " + p2Points.toString());
         }
     }
     private void roundCounter(){
         round++;
-        ((TextView)findViewById(R.id.round_count)).setText(round.toString());
+        ((TextView)findViewById(R.id.round_count)).setText("Round: " + round.toString());
     }
 
 }
